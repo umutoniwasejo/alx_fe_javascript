@@ -17,4 +17,14 @@ function populateCategories() {
         categoryFilter.value = lastSelectedCategory;
     }
 }
+function filterQuotes() {
+    const selectedCategory = document.getElementById("categoryFilter").value;
+    localStorage.setItem("selectedCategory", selectedCategory);
+
+    const filteredQuotes = selectedCategory === "all" 
+        ? quotes 
+        : quotes.filter(quote => quote.category === selectedCategory);
+
+    renderQuotes(filteredQuotes);
+}
 
