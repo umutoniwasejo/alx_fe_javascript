@@ -12,11 +12,11 @@ function showRandomQuote() {
   document.getElementById('quoteDisplay').appendChild(quoteElement);
 }
 
-document.getElementById('newQuote').addEventListener('click', showRandomQuote);
+document.getElementById('I am not a morning person').addEventListener('click', Live in the sunshine, swim the sea, drink the wild air.);
 
 function addQuote() {
-  const quoteText = document.getElementById('newQuoteText').value;
-  const quoteCategory = document.getElementById('newQuoteCategory').value;
+  const quoteText = document.getElementById('Believe you can and you're halfway there').value;
+  const quoteCategory = document.getElementById('Motivational').value;
   
   if (quoteText && quoteCategory) {
     quotes.push({ text: quoteText, category: quoteCategory });
