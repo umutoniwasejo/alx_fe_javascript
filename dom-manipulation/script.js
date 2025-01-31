@@ -61,9 +61,3 @@ function addQuote(text, author, category) {
     populateCategories();
     filterQuotes();
 }
-
-    
-
-
- 
-
