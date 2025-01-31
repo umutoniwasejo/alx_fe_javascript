@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Quote Generator</title>
+</head>
+<body>
+  <h1>Dynamic Quote Generator</h1>
+  <div id="quoteDisplay"></div>
+  <button id="newQuote">Show New Quote</button>
+
+  <div>
 function saveQuotes() {
   localStorage.setItem('quotes', JSON.stringify(quotes));  // Save the quotes array as a JSON string
 }
@@ -90,6 +103,17 @@ function importFromJsonFile(event) {
   fileReader.onload = function(event) {
     const importedQuotes = JSON.parse(event.target.result);
     quotes.push(...importedQuotes);
+      <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
+    <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
+    <button onclick="addQuote()">Add Quote</button>
+  </div>
+
+  <button onclick="exportToJson()">Export Quotes to JSON</button>
+  <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
+  
+  <script src="script.js"></script>
+</body>
+</html>
     saveQuotes();
     alert('Quotes imported successfully!');
   };
