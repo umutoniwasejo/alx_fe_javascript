@@ -44,6 +44,7 @@ function addQuote() {
     alert('Please fill in both fields!');
   }
 }
+<button onclick="exportToJson()">Export Quotes to JSON</button>
 
 // Export quotes to JSON
 function exportToJson() {
@@ -68,6 +69,7 @@ function exportToJson() {
   URL.revokeObjectURL(url);  // Clean up the URL object after download
 }
 }
+<input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
 
 // Import quotes from a JSON file
 function importFromJsonFile(event) {
