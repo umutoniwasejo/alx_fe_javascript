@@ -56,6 +56,17 @@ function exportToJson() {
   a.download = 'quotes.json';  // File name for download
   a.click();
   URL.revokeObjectURL(url);
+function exportToJson() {
+  const json = JSON.stringify(quotes);  // Convert the quotes array to JSON string
+  const blob = new Blob([json], { type: 'application/json' });  // Create a Blob object with JSON data
+  const url = URL.createObjectURL(blob);  // Generate a URL for the Blob object
+  
+  const a = document.createElement('a');  // Create a link element
+  a.href = url;  // Set the URL as the link's href
+  a.download = 'quotes.json';  // Set the file name for download
+  a.click();  // Trigger the download
+  URL.revokeObjectURL(url);  // Clean up the URL object after download
+}
 }
 
 // Import quotes from a JSON file
@@ -66,6 +77,16 @@ function importFromJsonFile(event) {
     quotes.push(...importedQuotes);  // Add imported quotes to the array
     saveQuotes();  // Save updated quotes to local storage
     alert('Quotes imported successfully!');
+function importFromJsonFile(event) {
+  const fileReader = new FileReader();  // Create a new FileReader to read the file
+  fileReader.onload = function(event) {
+    const importedQuotes = JSON.parse(event.target.result);  // Parse the file content as JSON
+    quotes.push(...importedQuotes);  // Add the imported quotes to the quotes array
+    saveQuotes();  // Save the updated quotes array to local storage
+    alert('Quotes imported successfully!');  // Notify the user
+  };
+  fileReader.readAsText(event.target.files[0]);  // Read the selected file as text
+}
   };
   fileReader.readAsText(event.target.files[0]);
 }
