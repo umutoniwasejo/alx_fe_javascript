@@ -16,7 +16,6 @@ function populateCategories() {
     if (lastSelectedCategory) {
         categoryFilter.value = lastSelectedCategory;
     }
-}
 function filterQuotes() {
     const selectedCategory = document.getElementById("categoryFilter").value;
     localStorage.setItem("selectedCategory", selectedCategory);
@@ -26,5 +25,14 @@ function filterQuotes() {
         : quotes.filter(quote => quote.category === selectedCategory);
 
     renderQuotes(filteredQuotes);
+}
+function addQuote(text, author, category) {
+    const newQuote = { text, author, category };
+    quotes.push(newQuote);
+    localStorage.setItem("quotes", JSON.stringify(quotes));
+    
+    // Update categories
+    populateCategories();
+    filterQuotes();
 }
 
