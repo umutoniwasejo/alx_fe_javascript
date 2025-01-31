@@ -20,18 +20,21 @@ function filterQuotes() {
     const selectedCategory = document.getElementById("categoryFilter").value;
     localStorage.setItem("selectedCategory", selectedCategory);
 
-    const filteredQuotes = selectedCategory === "all" 
-        ? quotes 
+    const filteredQuotes = selectedCategory === "all"
+        ? quotes
         : quotes.filter(quote => quote.category === selectedCategory);
 
-    renderQuotes(filteredQuotes);
+    renderQuotes(filteredQuotes); // Function to update the displayed quotes
 }
-function addQuote(text, author, category) {
-    const newQuote = { text, author, category };
-    quotes.push(newQuote);
-    localStorage.setItem("quotes", JSON.stringify(quotes));
-    
-    // Update categories
+localStorage.setItem("selectedCategory", selectedCategory);
+document.addEventListener("DOMContentLoaded", () => {
+    const lastSelectedCategory = localStorage.getItem("selectedCategory");
+    if (lastSelectedCategory) {
+        document.getElementById("categoryFilter").value = lastSelectedCategory;
+        filterQuotes(); // Apply the filter immediately
+    }
+});
+
     populateCategories();
     filterQuotes();
 }
