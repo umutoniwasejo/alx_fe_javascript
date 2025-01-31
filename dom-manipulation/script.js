@@ -44,6 +44,30 @@
         showRandomQuote();  // Display the newly added quote
       } else {
         alert('Please fill in both fields!');
+    function createAddQuoteForm() {
+  const formContainer = document.createElement('div');
+  
+  const inputText = document.createElement('input');
+  inputText.id = 'newQuoteText';
+  inputText.type = 'text';
+  inputText.placeholder = 'Enter a new quote';
+  
+  const inputCategory = document.createElement('input');
+  inputCategory.id = 'newQuoteCategory';
+  inputCategory.type = 'text';
+  inputCategory.placeholder = 'Enter quote category';
+  
+  const addButton = document.createElement('button');
+  addButton.textContent = 'Add Quote';
+  addButton.onclick = addQuote; // Attach the addQuote function to the button
+  
+  formContainer.appendChild(inputText);
+  formContainer.appendChild(inputCategory);
+  formContainer.appendChild(addButton);
+  
+  document.body.appendChild(formContainer); // Adds the form to the body
+}
+
       }
     }
   </script>
