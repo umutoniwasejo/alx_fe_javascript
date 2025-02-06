@@ -1,41 +1,46 @@
-Objective: Learn to create and manipulate dynamic content in a web application using advanced DOM manipulation techniques. This task focuses on generating interactive elements directly through JavaScript without relying on frameworks.
+document.addEventListener("DOMContentLoaded", () => {
+    const quoteDisplay = document.getElementById("quoteDisplay");
+    const newQuoteButton = document.getElementById("newQuote");
 
-Task Description:
-Develop a web application that dynamically generates content based on user input and interactions. This project will provide hands-on experience with creating, modifying, and managing elements in the DOM, demonstrating the core capabilities of JavaScript for building interactive web pages.
+    // Sample Quotes Array
+    let quotes = JSON.parse(localStorage.getItem("quotes")) || [
+        { text: "The best way to predict the future is to create it.", category: "Motivation" },
+        { text: "Do what you can, with what you have, where you are.", category: "Inspiration" },
+        { text: "Success is not the key to happiness. Happiness is the key to success.", category: "Happiness" }
+    ];
 
-Specific Project Details:
-Application Overview:
-Create a “Dynamic Quote Generator” that displays different quotes based on user-selected categories. Include functionality to add new quotes and categories dynamically through the user interface.
-Step 1: Setup the Basic HTML Structure
-HTML Setup:
-Create a simple HTML file index.html with basic structure including placeholders for dynamic content.
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Quote Generator</title>
-  </head>
-  <body>
-    <h1>Dynamic Quote Generator</h1>
-    <div id="quoteDisplay"></div>
-    <button id="newQuote">Show New Quote</button>
-    <script src="script.js"></script>
-  </body>
-  </html>
-Step 2: Implement Advanced DOM Manipulation in JavaScript
-JavaScript Implementation:
-Write a JavaScript file (script.js) that handles the creation and manipulation of DOM elements based on user interactions.
-Manage an array of quote objects where each quote has a text and a category. Implement functions to display a random quote and to add new quotes called showRandomQuote and createAddQuoteForm` respectively
-Step 3: Dynamic Quote Addition
-Adding Quotes Dynamically:
-Enhance the application to allow users to add their own quotes through a simple form interface. Update the DOM and the quotes array dynamically when a new quote is added.
-  <div>
-    <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
-    <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
-    <button onclick="addQuote()">Add Quote</button>
-  </div>
-Repo:
+    // Function to Show a Random Quote
+    function showRandomQuote() {
+        if (quotes.length === 0) {
+            quoteDisplay.innerHTML = "<p>No quotes available. Add some!</p>";
+            return;
+        }
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        const randomQuote = quotes[randomIndex];
+        quoteDisplay.innerHTML = `<p>"${randomQuote.text}" - <strong>${randomQuote.category}</strong></p>`;
+    }
 
-GitHub repository: alx_fe_javascript
-Directory: dom-manipulation
+    // Function to Add a New Quote
+    function addQuote() {
+        const newQuoteText = document.getElementById("newQuoteText").value.trim();
+        const newQuoteCategory = document.getElementById("newQuoteCategory").value.trim();
+
+        if (newQuoteText === "" || newQuoteCategory === "") {
+            alert("Please enter both a quote and a category.");
+            return;
+        }
+
+        quotes.push({ text: newQuoteText, category: newQuoteCategory });
+        localStorage.setItem("quotes", JSON.stringify(quotes));
+
+        document.getElementById("newQuoteText").value = "";
+        document.getElementById("newQuoteCategory").value = "";
+        showRandomQuote(); // Refresh display
+    }
+
+    // Event Listener for the Button
+    newQuoteButton.addEventListener("click", showRandomQuote);
+
+    // Initial Display
+    showRandomQuote();
+});
