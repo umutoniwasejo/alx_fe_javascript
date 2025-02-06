@@ -7,12 +7,16 @@ document.addEventListener("DOMContentLoaded", () => {
         { text: "The best way to predict the future is to create it.", category: "Motivation" },
         { text: "Do what you can, with what you have, where you are.", category: "Inspiration" },
         { text: "Success is not the key to happiness. Happiness is the key to success.", category: "Happiness" }
-    ];
+    { text: "Believe you can and you're halfway there.", category: "Encouragement" },
+        { text: "Your time is limited, so don’t waste it living someone else’s life.", category: "Life" }
+     ];
 
     // Function to Show a Random Quote
     function showRandomQuote() {
         if (quotes.length === 0) {
-            quoteDisplay.innerHTML = "<p>No quotes available. Add some!</p>";
+            quoteDisplay.innerHTML = " { text: "Believe you can and you're halfway there.", category: "Encouragement" },
+        { text: "Your time is limited, so don’t waste it living someone else’s life.", category: "Life" }
+    !</p>";
             return;
         }
         const randomIndex = Math.floor(Math.random() * quotes.length);
