@@ -20,6 +20,34 @@ document.addEventListener("DOMContentLoaded", () => {
         quoteDisplay.innerHTML = `<p>"${randomQuote.text}" - <strong>${randomQuote.category}</strong></p>`;
     }
 
+    // Function to Create the Form for Adding a New Quote
+    function createAddQuoteForm() {
+        const formContainer = document.createElement("div");
+
+        // Input Fields
+        const quoteInput = document.createElement("input");
+        quoteInput.id = "newQuoteText";
+        quoteInput.type = "text";
+        quoteInput.placeholder = "Enter a new quote";
+
+        const categoryInput = document.createElement("input");
+        categoryInput.id = "newQuoteCategory";
+        categoryInput.type = "text";
+        categoryInput.placeholder = "Enter quote category";
+
+        // Add Button
+        const addButton = document.createElement("button");
+        addButton.textContent = "Add Quote";
+        addButton.addEventListener("click", addQuote);
+
+        // Append Elements to Form
+        formContainer.appendChild(quoteInput);
+        formContainer.appendChild(categoryInput);
+        formContainer.appendChild(addButton);
+
+        document.body.appendChild(formContainer);
+    }
+
     // Function to Add a New Quote
     function addQuote() {
         const newQuoteText = document.getElementById("newQuoteText").value.trim();
@@ -30,17 +58,21 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        // Add the New Quote
         quotes.push({ text: newQuoteText, category: newQuoteCategory });
         localStorage.setItem("quotes", JSON.stringify(quotes));
 
+        // Clear Input Fields
         document.getElementById("newQuoteText").value = "";
         document.getElementById("newQuoteCategory").value = "";
+
         showRandomQuote(); // Refresh display
     }
 
-    // Event Listener for the Button
+    // Event Listener for the "Show New Quote" Button
     newQuoteButton.addEventListener("click", showRandomQuote);
 
-    // Initial Display
+    // Initialize Application
     showRandomQuote();
+    createAddQuoteForm();
 });
